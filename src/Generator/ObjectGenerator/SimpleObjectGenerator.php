@@ -85,17 +85,8 @@ final class SimpleObjectGenerator implements ObjectGeneratorInterface
     ): ObjectBag {
         // TODO: move this outside of this in a dedicated class e.g. TolerantObjectGenerator which could decorate the
         // root ObjectGeneratorInterface instance used
-        try {
-            return $this->generateObject(...func_get_args());
-        } catch (DebugUnexpectedValueException $exception) {
-            throw $exception;
-        } catch (RuntimeException $throwable) {
-            $throwableClass = DebugUnexpectedValueException::class;
-        } catch (LogicException $throwable) {
-            $throwableClass = LogicException::class;
-        } catch (Throwable $throwable) {
-            $throwableClass = Error::class;
-        }
+        return $this->generateObject(...func_get_args());
+
 
         $arguments = [
             sprintf(
